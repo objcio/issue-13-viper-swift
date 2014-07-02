@@ -34,7 +34,7 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
         gestureRecognizer.addTarget(self, action: Selector("dismiss"))
         
         transitioningBackgroundView.userInteractionEnabled = true
-        
+        transitioningBackgroundView.addGestureRecognizer(gestureRecognizer)
         nameTextField.becomeFirstResponder()
         
         if let realDatePicker = datePicker {
