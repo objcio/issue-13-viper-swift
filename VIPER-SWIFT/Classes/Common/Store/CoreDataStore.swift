@@ -23,7 +23,7 @@ class CoreDataStore : NSObject {
     var managedObjectModel : NSManagedObjectModel?
     var managedObjectContext : NSManagedObjectContext?
     
-    init() {
+    override init() {
         managedObjectModel = NSManagedObjectModel.mergedModelFromBundles(nil)
         
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
