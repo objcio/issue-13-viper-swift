@@ -9,9 +9,9 @@
 import Foundation
 
 struct UpcomingDisplayData : Equatable {
-    let sections : UpcomingDisplaySection[] = []
+    let sections : [UpcomingDisplaySection] = []
     
-    init(sections: UpcomingDisplaySection[]) {
+    init(sections: [UpcomingDisplaySection]) {
         self.sections = sections
         self.sections.unshare()
     }
