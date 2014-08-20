@@ -13,7 +13,6 @@ struct UpcomingDisplayData : Equatable {
     
     init(sections: [UpcomingDisplaySection]) {
         self.sections = sections
-        self.sections.unshare()
     }
 }
 

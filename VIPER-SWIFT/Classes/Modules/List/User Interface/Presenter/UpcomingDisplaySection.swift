@@ -20,7 +20,6 @@ struct UpcomingDisplaySection : Equatable {
         
         if items != nil {
             self.items = items!
-            self.items.unshare()
         }
     }
 }
