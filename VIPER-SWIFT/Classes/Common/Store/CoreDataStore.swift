@@ -23,7 +23,7 @@ class CoreDataStore : NSObject {
     var managedObjectModel : NSManagedObjectModel?
     var managedObjectContext : NSManagedObjectContext?
     
-    init() {
+    override init() {
         managedObjectModel = NSManagedObjectModel.mergedModelFromBundles(nil)
         
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
@@ -46,14 +46,14 @@ class CoreDataStore : NSObject {
         super.init()
     }
     
-    func fetchEntriesWithPredicate(predicate: NSPredicate, sortDescriptors: AnyObject[], completionBlock: ((ManagedTodoItem[]) -> Void)!) {
+    func fetchEntriesWithPredicate(predicate: NSPredicate, sortDescriptors: [AnyObject], completionBlock: (([ManagedTodoItem]) -> Void)!) {
         let fetchRequest = NSFetchRequest(entityName: "TodoItem")
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = []
         
         managedObjectContext?.performBlock {
             let queryResults = self.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
-            let managedResults = queryResults! as ManagedTodoItem[]
+            let managedResults = queryResults! as [ManagedTodoItem]
             completionBlock(managedResults)
         }
     }
