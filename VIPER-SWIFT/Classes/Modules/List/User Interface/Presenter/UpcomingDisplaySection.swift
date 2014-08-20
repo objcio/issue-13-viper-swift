@@ -18,7 +18,7 @@ struct UpcomingDisplaySection : Equatable {
         self.name = name
         self.imageName = imageName
         
-        if items {
+        if items != nil {
             self.items = items!
             self.items.unshare()
         }

@@ -16,7 +16,7 @@ class ListViewController : UITableViewController, ListViewInterface {
     var dataProperty : UpcomingDisplayData?
     var strongTableView : UITableView?
     
-    @IBOutlet var noContentView : UIView
+    @IBOutlet var noContentView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

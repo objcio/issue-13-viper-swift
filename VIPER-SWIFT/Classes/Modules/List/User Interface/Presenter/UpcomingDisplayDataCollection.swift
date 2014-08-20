@@ -71,8 +71,8 @@ class UpcomingDisplayDataCollection {
         
         for dateRelation in keys {
             var itemArray = sections[dateRelation]
-            
-            if itemArray {
+          
+            if itemArray != nil {
                 var displaySection = displaySectionForDateRelation(dateRelation)
                 displaySections.insert(displaySection, atIndex: displaySections.endIndex)
             }
