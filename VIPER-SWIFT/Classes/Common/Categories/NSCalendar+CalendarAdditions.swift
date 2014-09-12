@@ -61,7 +61,7 @@ extension NSCalendar {
     func dateForEndOfFollowingWeekWithDate(date: NSDate) -> NSDate {
         let endOfWeek = dateForEndOfWeekWithDate(date)
         let nextWeekComponent = NSDateComponents()
-        nextWeekComponent.day = 7
+        nextWeekComponent.weekOfYear = 1
         let followingWeekDate = dateByAddingComponents(nextWeekComponent, toDate: endOfWeek, options: nil)
         return followingWeekDate!
     }
