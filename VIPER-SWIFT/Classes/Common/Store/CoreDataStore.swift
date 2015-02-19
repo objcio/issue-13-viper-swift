@@ -23,11 +23,11 @@ class CoreDataStore : NSObject {
     var managedObjectModel : NSManagedObjectModel?
     var managedObjectContext : NSManagedObjectContext?
     
-    init() {
+    override init() {
         managedObjectModel = NSManagedObjectModel.mergedModelFromBundles(nil)
         
-        persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        
+        persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel!)
+      
         let domains = NSSearchPathDomainMask.UserDomainMask
         let directory = NSSearchPathDirectory.DocumentDirectory
         
@@ -42,25 +42,25 @@ class CoreDataStore : NSObject {
         managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
         managedObjectContext!.persistentStoreCoordinator = persistentStoreCoordinator
         managedObjectContext!.undoManager = nil
-        
+      
         super.init()
     }
     
-    func fetchEntriesWithPredicate(predicate: NSPredicate, sortDescriptors: AnyObject[], completionBlock: ((ManagedTodoItem[]) -> Void)!) {
+    func fetchEntriesWithPredicate(predicate: NSPredicate, sortDescriptors: [AnyObject], completionBlock: (([ManagedTodoItem]) -> Void)!) {
         let fetchRequest = NSFetchRequest(entityName: "TodoItem")
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = []
         
         managedObjectContext?.performBlock {
             let queryResults = self.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
-            let managedResults = queryResults! as ManagedTodoItem[]
+            let managedResults = queryResults! as [ManagedTodoItem]
             completionBlock(managedResults)
         }
     }
     
     func newTodoItem() -> ManagedTodoItem {
-        let entityDescription = NSEntityDescription.entityForName("TodoItem", inManagedObjectContext: managedObjectContext)
-        let newEntry = NSManagedObject(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext) as ManagedTodoItem
+        let entityDescription = NSEntityDescription.entityForName("TodoItem", inManagedObjectContext: managedObjectContext!)
+        let newEntry = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext) as ManagedTodoItem
         
         return newEntry
     }
