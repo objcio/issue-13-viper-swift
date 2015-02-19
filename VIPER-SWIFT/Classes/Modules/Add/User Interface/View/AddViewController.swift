@@ -12,8 +12,8 @@ import UIKit
 class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface {
     var eventHandler : AddModuleInterface?
 
-    @IBOutlet var nameTextField : UITextField
-    @IBOutlet var datePicker : UIDatePicker?
+    @IBOutlet var nameTextField : UITextField!
+    @IBOutlet var datePicker : UIDatePicker!
     
     var minimumDate : NSDate = NSDate()
     var transitioningBackgroundView : UIView = UIView()
