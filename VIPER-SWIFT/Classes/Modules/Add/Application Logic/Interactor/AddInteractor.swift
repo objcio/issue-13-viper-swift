@@ -12,7 +12,7 @@ class AddInteractor : NSObject {
     var addDataManager : AddDataManager?
     
     func saveNewEntryWithName(name: NSString, dueDate: NSDate) {
-        let newEntry = TodoItem(dueDate: dueDate, name: name)
+        let newEntry = TodoItem(dueDate: dueDate, name: name as String)
         addDataManager?.addNewEntry(newEntry)
     }
 }
