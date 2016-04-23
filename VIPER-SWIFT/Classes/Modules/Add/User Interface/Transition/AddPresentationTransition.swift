@@ -10,21 +10,23 @@ import Foundation
 import UIKit
 
 class AddPresentationTransition: NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning!) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 0.72
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning!) {
-        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
-        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as AddViewController
+    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        guard let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
+            toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? AddViewController else {
+                return
+        }
         
         toVC.transitioningBackgroundView.backgroundColor = UIColor.darkGrayColor()
         toVC.transitioningBackgroundView.alpha = 0.0
         toVC.transitioningBackgroundView.frame = UIScreen.mainScreen().bounds
         
         let containerView = transitionContext.containerView()
-        containerView.addSubview(toVC.transitioningBackgroundView)
-        containerView.addSubview(toVC.view)
+        containerView?.addSubview(toVC.transitioningBackgroundView)
+        containerView?.addSubview(toVC.view)
         
         let toViewFrame = CGRectMake(0, 0, 260, 300)
         toVC.view.frame = toViewFrame
